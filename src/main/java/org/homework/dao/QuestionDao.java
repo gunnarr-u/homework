@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Roman.
@@ -18,7 +19,11 @@ public class QuestionDao {
         template.update("insert into QUESTION VALUES (qidseq.nextval, ?, ?)", question, countryCode);
     }
 
-    public List<String> listQuestions() {
-        return template.queryForList("select q_text from QUESTION", String.class);
+    public List<Map<String, Object>> listQuestions() {
+        return template.queryForList("select Q_TEXT , Q_COUNTRY_CODE from QUESTION");
+    }
+
+    public List<Map<String, Object>> listQuestions(String countryCode) {
+        return template.queryForList("select Q_TEXT , Q_COUNTRY_CODE from QUESTION where Q_COUNTRY_CODE = ?", countryCode);
     }
 }
