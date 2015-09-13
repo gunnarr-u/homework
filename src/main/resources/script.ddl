@@ -10,3 +10,6 @@ CREATE TABLE words_blacklist
   word VARCHAR(255)
 );
 CREATE SEQUENCE qidseq START WITH 1;
+INSERT INTO words_blacklist VALUES ('Why');
+INSERT INTO words_blacklist VALUES ('What');
+INSERT INTO words_blacklist VALUES ('Where');

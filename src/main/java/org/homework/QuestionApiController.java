@@ -1,5 +1,6 @@
 package org.homework;
 
+import org.homework.dao.BlacklistService;
 import org.homework.dao.QuestionDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +26,15 @@ public class QuestionApiController {
     @Autowired
     private GeolocationService geolocationService;
 
+    @Autowired
+    private BlacklistService blacklistService;
+
     @RequestMapping("/ask")
     public String askQuestion(HttpServletRequest request, @RequestParam("question") String question) {
+
+        if (blacklistService.checkForBlackList(question)) {
+            return "Question: " + question + " not accepted";
+        }
         String remoteAddr = request.getRemoteAddr();
         LOG.debug("Received new question: {} form IP: {}");
         String countryCode = geolocationService.getCountryCodeByIp(remoteAddr);
