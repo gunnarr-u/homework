@@ -1,5 +1,6 @@
-package org.homework;
+package org.homework.service;
 
+import org.homework.Country;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
