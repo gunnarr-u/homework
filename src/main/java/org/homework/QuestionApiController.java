@@ -1,8 +1,9 @@
 package org.homework;
 
-import org.homework.service.BlacklistService;
 import org.homework.dao.QuestionDao;
+import org.homework.service.BlacklistService;
 import org.homework.service.GeolocationService;
+import org.homework.service.QuestionQuotaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +27,23 @@ public class QuestionApiController {
     private QuestionDao dao;
     @Autowired
     private GeolocationService geolocationService;
+    @Autowired
+    private QuestionQuotaService questionQuotaService;
 
     @Autowired
     private BlacklistService blacklistService;
 
     @RequestMapping("/ask")
     public String askQuestion(HttpServletRequest request, @RequestParam("question") String question) {
-
-        if (blacklistService.checkForBlackList(question)) {
-            return "Question: " + question + " not accepted";
-        }
         String remoteAddr = request.getRemoteAddr();
-        LOG.debug("Received new question: {} form IP: {}");
         String countryCode = geolocationService.getCountryCodeByIp(remoteAddr);
+
+
+
+        if (!questionQuotaService.getPermission(countryCode) || blacklistService.checkForBlackList(question)) {
+            return "Question: " + question + " rejected";
+        }
+        LOG.debug("Received new question: {} form IP: {}");
         dao.saveQuestion(question, countryCode);
         return "Question: " + question + " Accepted";
     }
