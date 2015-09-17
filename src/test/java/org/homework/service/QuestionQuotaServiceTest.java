@@ -1,5 +1,6 @@
 package org.homework.service;
 
+import org.homework.service.impl.QuestionQuotaServiceImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

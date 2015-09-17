@@ -1,4 +1,4 @@
-package org.homework;
+package org.homework.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,6 +1,7 @@
-package org.homework.service;
+package org.homework.service.impl;
 
-import org.homework.Country;
+import org.homework.domain.Country;
+import org.homework.service.GeolocationService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;

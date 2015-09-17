@@ -1,4 +1,4 @@
-package org.homework;
+package org.homework.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

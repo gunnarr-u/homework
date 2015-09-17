@@ -1,5 +1,6 @@
-package org.homework.dao;
+package org.homework.dao.impl;
 
+import org.homework.dao.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,6 @@ public class QuestionDaoImpl implements QuestionDao {
     @Override
     public List<Map<String,Object>> getBlacklistedWords(String[] values) {
         String inClause = Arrays.asList(values).stream().map(s -> "?").collect(Collectors.joining(", "));
-        return template.queryForList(String.format("select * from words_blacklist where word in (%s)", inClause), values);
+        return template.queryForList(String.format("select * from words_blacklist where word in (%s)", inClause), new Object[]{values});
     }
 }
