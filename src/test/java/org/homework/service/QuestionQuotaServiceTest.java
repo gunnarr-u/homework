@@ -12,14 +12,14 @@ public class QuestionQuotaServiceTest {
 
     @Test
     public void testGetPermission() throws Exception {
-        QuestionQuotaService quotaService = new QuestionQuotaService(1d);
+        QuestionQuotaService quotaService = new QuestionQuotaServiceImpl(1d);
         assertTrue(quotaService.getPermission("LV"));
         assertFalse(quotaService.getPermission("LV"));
     }
 
     @Test
     public void testGetPermissionDifferentCountry() throws Exception {
-        QuestionQuotaService quotaService = new QuestionQuotaService(1d);
+        QuestionQuotaService quotaService = new QuestionQuotaServiceImpl(1d);
         assertTrue(quotaService.getPermission("LV"));
         assertTrue(quotaService.getPermission("RU"));
         assertFalse(quotaService.getPermission("LV"));
@@ -28,7 +28,7 @@ public class QuestionQuotaServiceTest {
 
     @Test
     public void testGetPermissionDifferentCountryPlusTimeout() throws Exception {
-        QuestionQuotaService quotaService = new QuestionQuotaService(1d);
+        QuestionQuotaService quotaService = new QuestionQuotaServiceImpl(1d);
         assertTrue(quotaService.getPermission("LV"));
         assertTrue(quotaService.getPermission("RU"));
         Thread.sleep(1001);
